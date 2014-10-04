@@ -33,6 +33,7 @@ public class MusicService extends Service implements
 	private static final int NOTIFY_ID=1;
 	
 	private boolean shuffle=false;
+	private boolean repeat = false;
 	private Random rand;
 	
 	@Override
@@ -153,7 +154,12 @@ public class MusicService extends Service implements
 	public void onCompletion(MediaPlayer mp) {
 		if(player.getCurrentPosition() > 0){
 			mp.reset();
-			playNext();
+			if(repeat){
+				playSong();
+			}
+			else{ 
+				playNext();
+			}
 		}
 	}
 
@@ -194,6 +200,11 @@ public class MusicService extends Service implements
 	public void setShuffle(){
 		if(shuffle) shuffle=false;
 		else shuffle=true;
+	}
+	
+	public void setRepeat(){
+		if(repeat) repeat=false;
+		else repeat=true;
 	}
 	
 }
